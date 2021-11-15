@@ -58,7 +58,7 @@ function init() {
 
   // Material to be added to preanimated model
   var newMaterial = new THREE.MeshStandardMaterial({
-    color: 0x2E5939
+    color: 0x7E5939
   });
 
   // Load preanimated model, add material, and add it to the scene
@@ -72,9 +72,9 @@ function init() {
       });
       // set position and scale
       mesh = gltf.scene;
-      mesh.position.set(4, 0, 0);
-      mesh.rotation.set(0, 0, 0);
-      mesh.scale.set(1, 1, 1);
+      mesh.position.set(4, 2, 0);
+      mesh.rotation.set(0, 90, 0);
+      mesh.scale.set(2, 1, 1);
       // Add model to scene
       scene.add(mesh);
       //Check for and play animation frames
@@ -92,12 +92,12 @@ function init() {
 
   // Material to be added to static model
   var newMaterial2 = new THREE.MeshStandardMaterial({
-    color: 0x6E2E99
+    color: 0x0E5E86
   });
 
   // Load static model, add material, and add it to the scene
   const loader2 = new GLTFLoader().load(
-    "./assets/teddybear.glb",
+    "./assets/hairspray.glb",
     function(gltf) {
       // Scan loaded model for mesh and apply defined material if mesh is present
       gltf.scene.traverse(function(child) {
@@ -141,7 +141,7 @@ function init() {
  const loader3 = new FontLoader();
 				loader3.load( './assets/helvetiker_regular.typeface.json', function ( font ) {
           // Define font color
-					const color = 0x2E5999;
+					const color = 0x285922;
           // Define font material
 					const matDark = new THREE.LineBasicMaterial( {
 						color: color,
@@ -189,22 +189,22 @@ function render() {
 //Manual Looping animation for mesh2
 function manualAnimation() {
   if (ticker == 0) {
-    if (mesh2.scale.x < 2) {
-      mesh2.scale.x += 0.00341;
+    if (mesh.scale.x < 3) {
+      mesh.scale.x += 0.00341;
     }
-    if (mesh2.scale.x >= 2 && mesh2.scale.y < 2) {
-      mesh2.scale.y += 0.00341;
+    if (mesh.scale.x >= 3 && mesh.scale.y < 3) {
+      mesh.scale.y += 0.00341;
     }
-    if (mesh2.scale.x >= 2 && mesh2.scale.y >= 2 && mesh2.scale.z < 2) {
+    if (mesh2.scale.x >= 3 && mesh2.scale.y >= 3 && mesh2.scale.z < 3) {
       mesh2.scale.z += 0.00341;
     }
-    if (mesh2.scale.x >= 2 && mesh2.scale.y >= 2 && mesh2.scale.z >= 2) {
+    if (mesh.scale.x >= 3 && mesh.scale.y >= 3 && mesh.scale.z >= 3) {
       ticker = 1;
     }
   }
   if (ticker == 1) {
-    if (mesh2.scale.x >= 2 && mesh2.scale.y >= 2 && mesh2.scale.z > 1) {
-      mesh2.scale.z -= 0.00341;
+    if (mesh2.rotate.x >= 2 && mesh2.rotate.y >= 2 && mesh2.rotate.z > 1) {
+      mesh2.rotate.z -= 0.00341;
     }
     if (mesh2.scale.x >= 2 && mesh2.scale.y > 1 && mesh2.scale.z <= 1) {
       mesh2.scale.y -= 0.00341;
@@ -225,6 +225,6 @@ window.addEventListener("resize", onWindowResize);
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
+  renderer.setSize(window.innerWidth , window.innerHeight );
   render();
 }
